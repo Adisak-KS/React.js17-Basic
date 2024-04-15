@@ -1,0 +1,28 @@
+import Transaction from "./components/Transaction";
+import FormComponent from "./components/FormComponent";
+import "./App.css";
+import { useState } from "react";
+import DataContext from "./data/dataContext";
+import ReportComponent from "./components/ReportComponent";
+
+function App() {
+  const design = { color: "red", textAlign: "center" };
+  const [items, setItems] = useState([]);
+  const onAddNewItem = (newItem) => {
+    setItems((prevItem) => {
+      return [newItem, ...prevItem];
+    });
+  };
+  return (
+    <DataContext.Provider value={"อดิศักดิ์"}>
+      <div className="container">
+        <h1 style={design}>แอพบัญชีรายรับ-รายจ่าย</h1>
+        <ReportComponent/>
+        <FormComponent onAddItem={onAddNewItem} />
+        <Transaction items={items} />
+      </div>
+    </DataContext.Provider>
+  );
+}
+
+export default App;
